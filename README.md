@@ -2,8 +2,8 @@
 
 **A septic-pump-out business, in one database.** An installable driver PWA (routes, arrival,
 completion → the regulatory ledger) and an office web app (scheduling, billing, compliance,
-accounts receivable) over one Postgres. Built to replace a 30-year-old Click-Once/Access
-application — the domain rules below were learned from six decades of paper and kept because the
+accounts receivable) over one Postgres. Built to replace a Click-Once/Access
+application — the domain rules below were learned from decades of paper and kept because the
 paper taught them the hard way.
 
 ![The office due queue](images/dueque.gif)
@@ -152,7 +152,7 @@ redirects http, terminates TLS, and is the only port anyone outside the box can 
 
 ## Migrating from a legacy system
 
-The repository grew around a real migration of 61 years of Access/Click-Once exports (frozen
+The repository grew around a real migration of years of Access/Click-Once exports (frozen
 snapshot `2024-12-02`), and that machinery is generic and yours:
 
 - `etl/load_legacy.py` streams your CSVs verbatim into schema `legacy` (all-`TEXT`, unnormalised)
