@@ -1,0 +1,24 @@
+# Septic App — backend dev image (hot reload)
+#
+# Build tools (python3/make/g++) are required: `bcrypt` is a native addon and Alpine
+# (musl) has no prebuilt binary for it, so it compiles from source at install time.
+# postgresql-client provides psql for migration work from inside the container.
+FROM node:20-alpine
+
+RUN apk add --no-cache python3 make g++ postgresql-client
+
+WORKDIR /app
+
+# Dependency layer first, so source edits don't trigger a reinstall
+COPY package*.json ./
+# `npm install` not `npm ci` in dev: the committed lockfile predates the last
+# package.json edit and `ci` hard-fails on drift. The prod image uses `ci`.
+RUN npm install
+
+COPY . .
+
+EXPOSE 3001
+ENV NODE_ENV=development
+
+CMD ["npm", "run", "dev"]
+

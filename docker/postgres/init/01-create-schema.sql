@@ -1,0 +1,14 @@
+-- Runs once, when the postgres data volume is first created.
+--
+-- This creates ONLY the schema, not the tables. The app's TypeORM config sets
+--   schema: 'septic_app', synchronize: false, migrations: []
+-- so with the schema absent TypeORM cannot even create its own `migrations`
+-- bookkeeping table and the server dies on boot:
+--   error: schema "septic_app" does not exist
+--   Failed to start server: QueryFailedError: schema "septic_app" does not exist
+--
+-- Creating the schema is the minimum needed to boot. Creating the TABLES is
+-- deliberately NOT done here — the migration strategy is a Phase 2 decision
+-- (see docs/DATA_MODEL.md). Until then, /api/health works and any query that
+-- touches a real table will fail with "relation does not exist". That is expected.
+CREATE SCHEMA IF NOT EXISTS septic_app;

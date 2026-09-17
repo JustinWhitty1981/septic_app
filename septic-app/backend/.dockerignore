@@ -1,0 +1,19 @@
+# Keep the build context small and never leak secrets into an image layer.
+node_modules
+npm-debug.log*
+.git
+.gitignore
+.env
+.env.*
+*.md
+dist
+build
+coverage
+tests
+Dockerfile
+Dockerfile.*
+docker-compose*.yml
+
+# Windows Zone.Identifier ADS leftovers
+*:Zone.Identifier
+

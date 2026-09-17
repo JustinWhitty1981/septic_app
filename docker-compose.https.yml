@@ -1,0 +1,30 @@
+# HTTPS overlay. The base compose file stays plain http on loopback for
+# development; this file adds the TLS front door a real handset needs.
+#
+#   docker compose -f docker-compose.yml -f docker-compose.https.yml \
+#     --profile https up -d --build
+#
+# Put your cert chain and key in docker/nginx/certs/ first (see the README
+# in that directory). The dev servers stay on the compose network only —
+# nothing but nginx is reachable from outside this box.
+
+services:
+  frontend:
+    ports: !override []
+  backend:
+    ports: !override []
+
+  proxy:
+    image: nginx:1.27-alpine
+    container_name: septic-proxy
+    profiles: ["https"]
+    depends_on:
+      - frontend
+      - backend
+    ports:
+      - "${TLS_HTTP_PORT:-80}:80"
+      - "${TLS_HTTPS_PORT:-443}:443"
+    volumes:
+      - ./docker/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./docker/nginx/certs:/etc/nginx/certs:ro
+    restart: unless-stopped

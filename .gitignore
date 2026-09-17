@@ -1,0 +1,43 @@
+# --- build output ---
+dist/
+build/
+*.tsbuildinfo
+coverage/
+
+# --- dependencies ---
+node_modules/
+
+# --- secrets and local config ---
+.env
+.env.local
+.env.*.local
+!.env.example
+
+# --- Windows Zone.Identifier ADS leftovers (11,649 of these once) ---
+*:Zone.Identifier
+
+# --- legacy production data: PII of ~7,500 real customers ---
+# Intentionally NOT committed. Keep in a secured location outside the repo.
+# See docs/DATA_MODEL.md section 14 for the expected files and row counts.
+data/
+
+# --- browser debug captures (multi-MB, never a source of truth) ---
+*.har
+
+# --- logs / editor / os ---
+*.log
+npm-debug.log*
+.DS_Store
+.vscode/
+.idea/
+
+# --- docker ---
+pgdata/
+miniodata/
+
+# --- local-only working notes (never pushed) ---
+local/
+mental_model.md
+
+# --- TLS material: certs and keys are never committed (only the README) ---
+docker/nginx/certs/*.pem

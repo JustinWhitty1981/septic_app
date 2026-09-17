@@ -1,0 +1,22 @@
+# Septic App — frontend dev image (CRA hot reload)
+#
+# Node 20, not 22: react-scripts 5 / webpack 5 is not validated on Node 22.
+FROM node:20-alpine
+
+RUN apk add --no-cache tini
+
+WORKDIR /app
+
+COPY package*.json ./
+RUN npm install
+
+COPY . .
+
+EXPOSE 3000
+ENV HOST=0.0.0.0 \
+    PORT=3000 \
+    BROWSER=none \
+    GENERATE_SOURCEMAP=false
+
+ENTRYPOINT ["/sbin/tini","--"]
+CMD ["npm","start"]

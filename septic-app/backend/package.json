@@ -1,0 +1,40 @@
+{
+  "name": "septic-backend",
+  "version": "1.0.0",
+  "description": "Backend API for the Septic App web application",
+  "main": "dist/server.js",
+  "scripts": {
+    "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
+    "build": "tsc",
+    "start": "node dist/server.js",
+    "test": "jest",
+    "migrate": "ts-node scripts/migrate.ts",
+    "migrate:status": "ts-node scripts/migrate.ts status",
+    "seed:user": "ts-node scripts/seed-user.ts"
+  },
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.1122.0",
+    "bcrypt": "^5.1.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "helmet": "^7.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "pg": "^8.20.0",
+    "sharp": "^0.35.4",
+    "typeorm": "^0.3.20"
+  },
+  "devDependencies": {
+    "@types/bcrypt": "^5.0.2",
+    "@types/cors": "^2.8.17",
+    "@types/express": "^4.17.21",
+    "@types/jest": "^29.5.12",
+    "@types/jsonwebtoken": "^9.0.6",
+    "@types/node": "^20.12.7",
+    "@types/pg": "^8.20.0",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.4.12",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.4.5"
+  }
+}
